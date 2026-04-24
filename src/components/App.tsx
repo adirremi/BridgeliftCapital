@@ -30,7 +30,7 @@ const nav = [
   { href: '#funding', label: 'Funding' },
   { href: '#industries', label: 'Industries' },
   { href: '#process', label: 'Process' },
-  { href: '#examples', label: 'Examples' },
+  { href: '#examples', label: 'Recent fundings' },
   { href: '#faq', label: 'FAQ' },
 ] as const;
 
