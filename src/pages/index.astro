@@ -1,0 +1,40 @@
+---
+import App from '../components/App';
+import '../styles/global.css';
+const site = 'https://bridgeliftcapital.com';
+---
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      rel="icon"
+      type="image/webp"
+      href="/Bridge-Lift-Capital-Favicon.webp"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Get cash fast with same-day approval. No hard credit check. Working capital up to $2 million for small businesses. Bridge Lift Capital."
+    />
+    <title>Bridge Lift Capital | Fast working capital for small business</title>
+    <link rel="canonical" href={site} />
+    <meta property="og:url" content={site} />
+    <meta property="og:title" content="Bridge Lift Capital" />
+    <meta
+      property="og:description"
+      content="Same-day approval. Soft credit only. Up to $2M working capital for established businesses."
+    />
+    <meta property="og:image" content={site + '/wp-content/uploads/2024/11/Bridge-Lift-Capital.webp'} />
+    <meta name="twitter:card" content="summary_large_image" />
+  </head>
+  <body class="min-h-screen bg-slate-50 text-slate-800 antialiased">
+    <App client:load />
+  </body>
+</html>
