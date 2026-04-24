@@ -1,24 +1,25 @@
 import { type FormEvent, useState } from 'react';
 import {
   ArrowUpRight,
-  Award,
   Building2,
   CheckCircle2,
   ChevronDown,
   ChevronRight,
   Clock3,
+  Coffee,
   HeartPulse,
   Menu,
   Phone,
+  Scissors,
   ShieldCheck,
-  ShoppingBag,
   Sparkles,
-  Star,
+  Store,
   Truck,
   Utensils,
   Wrench,
   X,
   Zap,
+  type LucideIcon,
 } from 'lucide-react';
 
 const APPLY = 'https://bridgeliftcapital.com/apply-now/';
@@ -28,65 +29,65 @@ const PRIVACY = 'https://bridgeliftcapital.com/privacy-policy/';
 const nav = [
   { href: '#funding', label: 'Funding' },
   { href: '#industries', label: 'Industries' },
-  { href: '#how', label: 'How it works' },
-  { href: '#stories', label: 'Customers' },
+  { href: '#process', label: 'Process' },
+  { href: '#examples', label: 'Examples' },
   { href: '#faq', label: 'FAQ' },
 ] as const;
 
-type Story = {
-  name: string;
-  industry: string;
+type FundingExample = {
+  icon: LucideIcon;
+  business: string;
   amount: string;
-  city: string;
-  img: string;
+  use: string;
+  tone: string;
 };
 
-const stories: Story[] = [
+const examples: FundingExample[] = [
   {
-    name: 'Lina M.',
-    industry: 'Salon owner',
+    icon: Scissors,
+    business: 'Salon',
     amount: '$25,000',
-    city: 'Brooklyn, NY',
-    img: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=240&h=240&fit=crop&auto=format&q=70',
+    use: 'Payroll, inventory, and weekend demand',
+    tone: 'from-emerald-100 to-sky-100 text-emerald-700',
   },
   {
-    name: 'Jonathan R.',
-    industry: 'Pet grooming',
+    icon: HeartPulse,
+    business: 'Pet grooming',
     amount: '$75,000',
-    city: 'Queens, NY',
-    img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=240&h=240&fit=crop&auto=format&q=70',
+    use: 'New location build-out and working capital',
+    tone: 'from-sky-100 to-cyan-100 text-sky-700',
   },
   {
-    name: 'Emma S.',
-    industry: 'Coffee shop',
+    icon: Coffee,
+    business: 'Coffee shop',
     amount: '$5,000',
-    city: 'Manhattan, NY',
-    img: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=240&h=240&fit=crop&auto=format&q=70',
+    use: 'Cash-flow cushion for seasonal purchasing',
+    tone: 'from-lime-100 to-emerald-100 text-lime-700',
   },
   {
-    name: 'Ahmed K.',
-    industry: 'Auto repair',
+    icon: Wrench,
+    business: 'Auto repair',
     amount: '$120,000',
-    city: 'Newark, NJ',
-    img: 'https://images.unsplash.com/photo-1520975916090-3105956dac38?w=240&h=240&fit=crop&auto=format&q=70',
+    use: 'Parts, vendor balances, and shop upgrades',
+    tone: 'from-cyan-100 to-blue-100 text-cyan-700',
   },
   {
-    name: 'Maria G.',
-    industry: 'Restaurant',
+    icon: Utensils,
+    business: 'Restaurant',
     amount: '$60,000',
-    city: 'Bronx, NY',
-    img: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=240&h=240&fit=crop&auto=format&q=70',
+    use: 'Inventory, staffing, and kitchen repairs',
+    tone: 'from-emerald-100 to-teal-100 text-emerald-700',
   },
   {
-    name: 'David L.',
-    industry: 'Construction',
+    icon: Building2,
+    business: 'Construction',
     amount: '$200,000',
-    city: 'Long Island, NY',
-    img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=240&h=240&fit=crop&auto=format&q=70',
+    use: 'Materials and payroll between draws',
+    tone: 'from-blue-100 to-emerald-100 text-blue-700',
   },
 ];
 
-const heroStack: Story[] = stories.slice(0, 3);
+const heroExamples = examples.slice(0, 3);
 
 const industries = [
   { icon: Wrench, name: 'Auto body & repair' },
@@ -94,36 +95,36 @@ const industries = [
   { icon: HeartPulse, name: 'Healthcare & medical' },
   { icon: Truck, name: 'Transportation' },
   { icon: Building2, name: 'Construction' },
-  { icon: ShoppingBag, name: 'Retail & e-commerce' },
+  { icon: Store, name: 'Retail & storefronts' },
 ] as const;
 
 const stats = [
-  { v: '$2M', l: 'Up to per business' },
-  { v: '24h', l: 'Average funding time' },
-  { v: '10mo', l: 'Minimum time in business' },
-  { v: '500+', l: 'FICO accepted' },
+  { v: '$2M', l: 'Funding up to' },
+  { v: '$50M+', l: 'Funded nationwide' },
+  { v: '1hr', l: 'Decision speed' },
+  { v: 'Same day', l: 'Funding available' },
 ];
 
 const faqs = [
   {
-    q: 'Will applying affect my credit score?',
-    a: 'No. We only run a soft credit pull during pre-qualification, which never impacts your credit score.',
+    q: 'What kind of funding does BridgeLift Capital provide?',
+    a: 'BridgeLift Capital provides cash advance and revenue-based financing for small businesses. Repayment is structured around business revenue, not a traditional bank-loan model.',
   },
   {
-    q: 'How quickly can I get funded?',
-    a: 'Most qualified businesses receive a decision the same day, with funds wired within 24–48 hours after final approval.',
+    q: 'Will applying affect my credit score?',
+    a: 'No. Pre-qualification uses a soft credit pull only, so your credit score is not affected.',
+  },
+  {
+    q: 'How fast can I get a decision?',
+    a: 'Most complete submissions receive a decision in about 1 hour during business hours, with same-day funding available after final approval.',
   },
   {
     q: 'What can I use the funds for?',
-    a: 'Inventory, payroll, equipment, repairs, marketing, expansion, refinancing, or any other working-capital need.',
+    a: 'Inventory, payroll, repairs, marketing, taxes, vendor payments, expansion, or general working capital needs.',
   },
   {
-    q: 'What documents do I need to apply?',
-    a: 'Typically the last 3 months of business bank statements and a quick online application — that’s it.',
-  },
-  {
-    q: 'Do you work with all industries?',
-    a: 'Bridge Lift Capital is industry-agnostic and partners with most B2B and B2C businesses across the United States.',
+    q: 'What are the minimum requirements?',
+    a: 'At least 10 months in business, $15,000+ in monthly revenue, 500+ FICO, and no open bankruptcies.',
   },
 ];
 
@@ -131,42 +132,47 @@ function buildMailto(subject: string, data: Record<string, string>) {
   const body = Object.entries(data)
     .map(([k, v]) => `${k}: ${v}`)
     .join('\n');
+
   return `mailto:deals@bridgeliftcapital.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 }
 
-function CircleAvatar({ src, alt, size = 'md' }: { src: string; alt: string; size?: 'sm' | 'md' | 'lg' }) {
-  const dim = size === 'lg' ? 'h-16 w-16' : size === 'sm' ? 'h-10 w-10' : 'h-12 w-12';
+function BusinessIcon({
+  icon: Icon,
+  tone,
+  size = 'md',
+}: {
+  icon: LucideIcon;
+  tone: string;
+  size?: 'sm' | 'md' | 'lg';
+}) {
+  const dim =
+    size === 'lg' ? 'h-16 w-16' : size === 'sm' ? 'h-10 w-10' : 'h-12 w-12';
+
   return (
     <span
-      className={`relative inline-block ${dim} shrink-0 overflow-hidden rounded-full ring-2 ring-white shadow-sm`}
+      className={`inline-flex ${dim} shrink-0 items-center justify-center rounded-full bg-gradient-to-br ${tone} ring-4 ring-white shadow-soft`}
     >
-      <img
-        src={src}
-        alt={alt}
-        loading="lazy"
-        decoding="async"
-        className="h-full w-full object-cover"
-      />
+      <Icon className={size === 'lg' ? 'h-7 w-7' : 'h-5 w-5'} strokeWidth={1.8} />
     </span>
   );
 }
 
 function ApprovalCard({
-  story,
+  item,
   className = '',
 }: {
-  story: Story;
+  item: FundingExample;
   className?: string;
 }) {
   return (
     <div
       className={`flex w-72 items-center gap-3 rounded-2xl border border-slate-200/80 bg-white/95 p-3 shadow-soft backdrop-blur ${className}`}
     >
-      <CircleAvatar src={story.img} alt={story.name} size="lg" />
+      <BusinessIcon icon={item.icon} tone={item.tone} size="lg" />
       <div className="min-w-0 flex-1">
         <div className="flex items-center justify-between gap-2">
           <p className="truncate text-sm font-semibold text-slate-900">
-            {story.name}
+            {item.business}
           </p>
           <span className="inline-flex items-center gap-1 rounded-full bg-mint-50 px-2 py-0.5 text-[11px] font-medium text-mint-600 ring-1 ring-mint-100">
             <CheckCircle2 className="h-3 w-3" strokeWidth={2.5} />
@@ -174,10 +180,10 @@ function ApprovalCard({
           </span>
         </div>
         <p className="mt-0.5 truncate text-xs text-slate-500">
-          {story.industry} · {story.city}
+          Revenue-based financing
         </p>
         <p className="mt-1 text-xl font-bold tracking-tight text-slate-900">
-          {story.amount}
+          {item.amount}
         </p>
       </div>
     </div>
@@ -216,15 +222,14 @@ function App() {
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-2 text-xs sm:px-6">
           <p className="flex items-center gap-2 font-medium text-mint-700">
             <ShieldCheck className="h-3.5 w-3.5" strokeWidth={2.5} />
-            Soft credit pull only · No impact on your score
+            Direct cash advance lender · Soft credit pull only
           </p>
           <div className="hidden items-center gap-3 text-mint-700 sm:flex">
             <span className="inline-flex items-center gap-1 font-medium">
-              <Star className="h-3.5 w-3.5 fill-current text-amber-400" /> 4.9
-              avg
+              <Clock3 className="h-3.5 w-3.5" /> 1 hour decision
             </span>
             <span aria-hidden>·</span>
-            <span>BBB-grade reviews</span>
+            <span>Same day funding available</span>
           </div>
         </div>
       </div>
@@ -234,7 +239,7 @@ function App() {
           <a className="flex min-w-0 items-center gap-2" href="#">
             <img
               src="/Bridge-Lift-Capital.webp"
-              alt="Bridge Lift Capital"
+              alt="BridgeLift Capital"
               className="h-10 w-auto sm:h-11"
               width={180}
               height={71}
@@ -264,7 +269,7 @@ function App() {
             </a>
             <a
               href={APPLY}
-              className="inline-flex items-center justify-center gap-1 rounded-lg bg-gradient-to-tr from-brand-600 to-brand-500 px-3.5 py-2 text-sm font-semibold text-white shadow-md shadow-brand-600/20 transition hover:from-brand-500 hover:to-brand-400"
+              className="inline-flex items-center justify-center gap-1 rounded-lg bg-gradient-to-tr from-mint-500 to-brand-500 px-3.5 py-2 text-sm font-semibold text-white shadow-md shadow-brand-600/20 transition hover:from-mint-400 hover:to-brand-400"
             >
               Apply now
               <ArrowUpRight className="h-3.5 w-3.5" />
@@ -307,10 +312,7 @@ function App() {
 
       <main id="main">
         <section className="relative overflow-hidden">
-          <div
-            className="absolute inset-0 -z-10 bg-mesh-light"
-            aria-hidden
-          />
+          <div className="absolute inset-0 -z-10 bg-mesh-light" aria-hidden />
           <div
             className="absolute inset-0 -z-10 bg-dot-grid bg-dot-grid [mask-image:radial-gradient(60%_50%_at_50%_30%,black,transparent_75%)]"
             aria-hidden
@@ -322,24 +324,26 @@ function App() {
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-mint-400 opacity-60" />
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-mint-500" />
                 </span>
-                SAME-DAY APPROVAL · NO HARD CREDIT PULL
+                CASH ADVANCE LENDER · REVENUE-BASED FINANCING
               </p>
 
               <h1 className="mt-5 text-balance font-semibold tracking-tight text-slate-900 text-display">
-                Working capital
+                Fast capital
                 <br />
-                that moves at the
+                built around your
                 <span className="bg-gradient-to-r from-brand-600 via-mint-500 to-brand-500 bg-clip-text text-transparent">
-                  {' '}speed of your business
+                  {' '}
+                  revenue
                 </span>
                 .
               </h1>
 
               <p className="mt-5 max-w-xl text-pretty text-lg text-slate-600">
-                Up to{' '}
-                <span className="font-semibold text-slate-900">$2 million</span>{' '}
-                in flexible funding for established small businesses. Apply in
-                minutes — soft credit only, real humans, real answers.
+                BridgeLift Capital provides cash advances and revenue-based
+                financing up to{' '}
+                <span className="font-semibold text-slate-900">$2 million</span>
+                . Apply in minutes, get a 1 hour decision, and access same day
+                funding after approval.
               </p>
 
               <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
@@ -347,7 +351,7 @@ function App() {
                   href={APPLY}
                   className="group inline-flex items-center justify-center gap-1.5 rounded-xl bg-slate-900 px-6 py-3.5 text-base font-semibold text-white shadow-soft transition hover:bg-slate-800"
                 >
-                  Get my offer
+                  Get funded today
                   <ChevronRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
                 </a>
                 <a
@@ -362,8 +366,8 @@ function App() {
               <ul className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-slate-600">
                 {[
                   ['No impact on credit', ShieldCheck],
-                  ['Funds in 24 hours', Zap],
-                  ['Industry-agnostic', Award],
+                  ['Same day funding', Zap],
+                  ['Fast approvals', Clock3],
                 ].map(([label, Icon]) => {
                   const I = Icon as typeof ShieldCheck;
                   return (
@@ -385,30 +389,30 @@ function App() {
                 <div className="absolute inset-0 grid place-items-center">
                   <div className="relative h-72 w-72 rounded-full bg-gradient-to-br from-brand-100 to-mint-100 ring-1 ring-white/60">
                     <div className="absolute inset-4 rounded-full border-2 border-dashed border-white/80" />
-                    <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
+                    <div className="absolute left-1/2 top-1/2 w-44 -translate-x-1/2 -translate-y-1/2 text-center">
                       <p className="text-xs font-semibold uppercase tracking-widest text-slate-500">
-                        Funded this week
+                        Direct funding
                       </p>
                       <p className="mt-2 text-4xl font-bold text-slate-900">
-                        $4.6M+
+                        $50M+
                       </p>
                       <p className="mt-1 text-xs text-slate-500">
-                        across 38 businesses
+                        funded through revenue-based capital
                       </p>
                     </div>
                   </div>
                 </div>
 
                 <ApprovalCard
-                  story={heroStack[0]}
+                  item={heroExamples[0]}
                   className="absolute left-0 top-2 -rotate-3 animate-floaty"
                 />
                 <ApprovalCard
-                  story={heroStack[1]}
+                  item={heroExamples[1]}
                   className="absolute right-0 top-32 rotate-2 animate-floaty [animation-delay:1.2s]"
                 />
                 <ApprovalCard
-                  story={heroStack[2]}
+                  item={heroExamples[2]}
                   className="absolute bottom-0 left-6 -rotate-2 animate-floaty [animation-delay:2.4s]"
                 />
               </div>
@@ -419,18 +423,20 @@ function App() {
             <div className="mask-fade-x mx-auto max-w-6xl overflow-hidden">
               <div className="flex w-max animate-marquee items-center gap-12 px-6 py-4 text-sm font-semibold uppercase tracking-widest text-slate-400">
                 {[
-                  'BBB Accredited',
-                  '$250M+ funded',
-                  '10,000+ businesses',
+                  'Over $50M funded',
                   'Same-day funding',
-                  'A+ rated',
-                  'Trusted by ISOs',
-                  'BBB Accredited',
-                  '$250M+ funded',
-                  '10,000+ businesses',
+                  '1 hour decisions',
+                  'Soft credit only',
+                  'Fast approvals',
+                  'Revenue-based financing',
+                  'Direct lender',
+                  'Over $50M funded',
                   'Same-day funding',
-                  'A+ rated',
-                  'Trusted by ISOs',
+                  '1 hour decisions',
+                  'Soft credit only',
+                  'Fast approvals',
+                  'Revenue-based financing',
+                  'Direct lender',
                 ].map((t, i) => (
                   <span key={i} className="flex items-center gap-3">
                     <span className="inline-block h-1.5 w-1.5 rounded-full bg-mint-400" />
@@ -469,106 +475,100 @@ function App() {
           <div className="mx-auto max-w-6xl px-4 sm:px-6">
             <div className="mx-auto max-w-2xl text-center">
               <p className="text-eyebrow font-semibold uppercase text-brand-700">
-                Funding products
+                Cash advance funding
               </p>
               <h2 className="mt-3 text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">
-                Choose the right capital for your moment.
+                Revenue-based financing, without the bank delay.
               </h2>
               <p className="mt-3 text-pretty text-slate-600">
-                Cover gaps, stock up, hire, expand. Pick what fits — switch when
-                your needs evolve.
+                A fast capital advance based on your business revenue. Use it
+                for working capital, inventory, payroll, repairs, or expansion.
               </p>
             </div>
 
-            <div className="mt-12 grid gap-6 lg:grid-cols-3">
-              {[
-                {
-                  badge: 'Most popular',
-                  highlight: true,
-                  name: 'Working Capital Advance',
-                  desc: 'A lump sum based on your future receivables. Fixed daily or weekly remittance — no surprises.',
-                  pts: ['Up to $2M', '6–18 month terms', 'Funded in 24 hours'],
-                },
-                {
-                  name: 'Business Line of Credit',
-                  desc: 'A revolving line you draw from when you need it. Pay only for what you use.',
-                  pts: ['Up to $250K', 'Refresh as you repay', 'Same-day draws'],
-                },
-                {
-                  name: 'Equipment & Expansion',
-                  desc: 'Term-based capital for vehicles, build-outs, or major expansion projects.',
-                  pts: ['Up to $1M', 'Longer terms', 'Tailored to your sector'],
-                },
-              ].map((p) => (
-                <article
-                  key={p.name}
-                  className={`relative flex flex-col rounded-3xl border p-6 transition sm:p-7 ${
-                    p.highlight
-                      ? 'border-mint-200 bg-white shadow-glow'
-                      : 'border-slate-200 bg-white shadow-soft hover:-translate-y-0.5 hover:shadow-md'
-                  }`}
+            <div className="mt-12 grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
+              <article className="relative overflow-hidden rounded-3xl border border-mint-200 bg-white p-7 shadow-glow sm:p-9">
+                <span className="inline-flex items-center gap-1 rounded-full bg-gradient-to-tr from-mint-500 to-brand-500 px-3 py-1 text-xs font-semibold text-white shadow-md">
+                  <Sparkles className="h-3 w-3" />
+                  Core product
+                </span>
+                <h3 className="mt-5 text-2xl font-semibold tracking-tight text-slate-900">
+                  Merchant Cash Advance
+                </h3>
+                <p className="mt-3 max-w-2xl text-pretty text-slate-600">
+                  Get an advance on future receivables with payments aligned to
+                  business activity. It is built for owners who need speed,
+                  flexibility, and clear terms.
+                </p>
+                <ul className="mt-7 grid gap-3 sm:grid-cols-2">
+                  {[
+                    'Funding up to $2M',
+                    '1 hour decision',
+                    'Same day funding available',
+                    'No hard credit pull',
+                    'Revenue-based repayment',
+                    'Low, competitive fees',
+                  ].map((pt) => (
+                    <li key={pt} className="flex items-center gap-2 text-sm text-slate-700">
+                      <CheckCircle2 className="h-4 w-4 text-mint-500" strokeWidth={2.25} />
+                      {pt}
+                    </li>
+                  ))}
+                </ul>
+                <a
+                  href={APPLY}
+                  className="mt-8 inline-flex items-center justify-center gap-1 rounded-xl bg-slate-900 px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-800"
                 >
-                  {p.badge ? (
-                    <span className="absolute -top-3 left-6 inline-flex items-center gap-1 rounded-full bg-gradient-to-tr from-mint-500 to-brand-500 px-3 py-1 text-xs font-semibold text-white shadow-md">
-                      <Sparkles className="h-3 w-3" />
-                      {p.badge}
-                    </span>
-                  ) : null}
-                  <h3 className="text-xl font-semibold tracking-tight text-slate-900">
-                    {p.name}
-                  </h3>
-                  <p className="mt-2 text-sm text-slate-600">{p.desc}</p>
-                  <ul className="mt-5 space-y-2 text-sm text-slate-700">
-                    {p.pts.map((pt) => (
-                      <li key={pt} className="flex items-center gap-2">
-                        <CheckCircle2
-                          className="h-4 w-4 text-mint-500"
-                          strokeWidth={2.25}
-                        />
-                        {pt}
-                      </li>
-                    ))}
-                  </ul>
-                  <a
-                    href={APPLY}
-                    className={`mt-7 inline-flex items-center justify-center gap-1 rounded-xl px-4 py-2.5 text-sm font-semibold transition ${
-                      p.highlight
-                        ? 'bg-slate-900 text-white hover:bg-slate-800'
-                        : 'bg-slate-100 text-slate-900 hover:bg-slate-200'
-                    }`}
-                  >
-                    See if you qualify
-                    <ChevronRight className="h-4 w-4" />
-                  </a>
-                </article>
-              ))}
+                  Apply for an advance
+                  <ChevronRight className="h-4 w-4" />
+                </a>
+              </article>
+
+              <aside className="rounded-3xl border border-slate-200 bg-white p-7 shadow-soft">
+                <p className="text-eyebrow font-semibold uppercase text-slate-500">
+                  Minimum requirements
+                </p>
+                <ul className="mt-5 space-y-3">
+                  {[
+                    ['Time in business', '10+ months'],
+                    ['Monthly revenue', '$15,000+'],
+                    ['FICO', '500+'],
+                    ['Bankruptcies', 'None open'],
+                  ].map(([label, value]) => (
+                    <li
+                      key={label}
+                      className="flex items-center justify-between gap-3 rounded-2xl bg-slate-50 px-4 py-3"
+                    >
+                      <span className="text-sm text-slate-500">{label}</span>
+                      <span className="font-semibold text-slate-900">{value}</span>
+                    </li>
+                  ))}
+                </ul>
+              </aside>
             </div>
           </div>
         </section>
 
-        <section
-          id="industries"
-          className="bg-white py-20 sm:py-24"
-        >
+        <section id="industries" className="bg-white py-20 sm:py-24">
           <div className="mx-auto max-w-6xl px-4 sm:px-6">
             <div className="grid gap-12 lg:grid-cols-12 lg:gap-10">
               <div className="lg:col-span-5">
                 <p className="text-eyebrow font-semibold uppercase text-brand-700">
-                  Industries we serve
+                  Businesses we fund
                 </p>
                 <h2 className="mt-3 text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">
-                  Tailored capital for the industries you work in.
+                  Fast approvals for everyday businesses.
                 </h2>
                 <p className="mt-4 text-pretty text-slate-600">
-                  Bridge Lift Capital is industry-agnostic — but we know small
-                  businesses run on different rhythms. We design funding around
-                  the cycles of your sector.
+                  From restaurants to repair shops, BridgeLift Capital evaluates
+                  real revenue and business momentum so owners can access
+                  capital without traditional bank friction.
                 </p>
                 <a
                   href={APPLY}
                   className="mt-8 inline-flex items-center gap-1 font-semibold text-brand-700 hover:text-brand-600"
                 >
-                  Find my fit
+                  See if you qualify
                   <ArrowUpRight className="h-4 w-4" />
                 </a>
               </div>
@@ -597,28 +597,28 @@ function App() {
         </section>
 
         <section
-          id="stories"
+          id="examples"
           className="relative overflow-hidden border-y border-slate-100 bg-gradient-to-b from-mint-50/40 via-white to-brand-50/30 py-20 sm:py-24"
         >
           <div className="mx-auto max-w-6xl px-4 sm:px-6">
             <div className="flex flex-col items-end justify-between gap-6 sm:flex-row sm:items-end">
               <div className="max-w-2xl">
                 <p className="text-eyebrow font-semibold uppercase text-brand-700">
-                  Real businesses · Real funding
+                  Funding examples
                 </p>
                 <h2 className="mt-3 text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">
-                  Owners we’ve helped go from gap to growth.
+                  Real-world cash needs, fast capital responses.
                 </h2>
               </div>
               <p className="text-sm text-slate-500">
-                Examples shown for illustration. Approved amounts vary.
+                Examples are illustrative. Approved amounts vary by revenue.
               </p>
             </div>
 
             <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-              {stories.map((s) => (
+              {examples.map((item) => (
                 <article
-                  key={s.name + s.industry}
+                  key={item.business}
                   className="group relative overflow-hidden rounded-3xl border border-slate-200 bg-white p-6 shadow-soft transition hover:-translate-y-0.5 hover:shadow-md"
                 >
                   <div
@@ -626,29 +626,27 @@ function App() {
                     aria-hidden
                   />
                   <div className="relative flex items-center gap-4">
-                    <CircleAvatar src={s.img} alt={s.name} size="lg" />
+                    <BusinessIcon icon={item.icon} tone={item.tone} size="lg" />
                     <div className="min-w-0">
                       <p className="text-base font-semibold text-slate-900">
-                        {s.name}
+                        {item.business}
                       </p>
-                      <p className="text-sm text-slate-500">
-                        {s.industry} · {s.city}
-                      </p>
+                      <p className="text-sm text-slate-500">{item.use}</p>
                     </div>
                   </div>
 
-                  <div className="relative mt-6 flex items-end justify-between">
+                  <div className="relative mt-6 flex items-end justify-between gap-4">
                     <div>
                       <p className="text-eyebrow font-semibold uppercase text-slate-500">
                         Approved for
                       </p>
                       <p className="mt-1 text-3xl font-bold tracking-tight text-slate-900">
-                        {s.amount}
+                        {item.amount}
                       </p>
                     </div>
                     <span className="inline-flex items-center gap-1 rounded-full bg-mint-50 px-2.5 py-1 text-xs font-semibold text-mint-700 ring-1 ring-mint-100">
                       <Clock3 className="h-3 w-3" />
-                      Funded in 24h
+                      Same day funding
                     </span>
                   </div>
                 </article>
@@ -657,31 +655,36 @@ function App() {
           </div>
         </section>
 
-        <section id="how" className="bg-white py-20 sm:py-24">
+        <section id="process" className="bg-white py-20 sm:py-24">
           <div className="mx-auto max-w-6xl px-4 sm:px-6">
             <div className="mx-auto max-w-2xl text-center">
               <p className="text-eyebrow font-semibold uppercase text-brand-700">
-                How it works
+                Our process
               </p>
               <h2 className="mt-3 text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">
-                Three steps. No surprises.
+                Built for speed, underwritten like a lender.
               </h2>
+              <p className="mt-3 text-pretty text-slate-600">
+                No shopping your file around. BridgeLift Capital reviews your
+                revenue, verifies eligibility, and gives you a clear funding
+                path.
+              </p>
             </div>
 
             <ol className="mt-12 grid gap-6 sm:grid-cols-3">
               {(
                 [
                   {
-                    step: 'Apply',
-                    d: 'Complete our short online application in minutes — no documents pile.',
+                    step: 'Apply online',
+                    d: 'Submit a short application with basic business details and recent bank statements.',
                   },
                   {
-                    step: 'Get approved',
-                    d: 'Receive a soft-credit decision the same day with transparent terms.',
+                    step: '1 hour decision',
+                    d: 'Our underwriting team reviews revenue, cash flow, and soft-credit data quickly.',
                   },
                   {
-                    step: 'Receive funding',
-                    d: 'Funds wired to your business account, often within 24 hours.',
+                    step: 'Same day funding',
+                    d: 'Accept your offer and receive funds as soon as the same business day after approval.',
                   },
                 ] as const
               ).map((item, i) => (
@@ -710,17 +713,17 @@ function App() {
                 {
                   icon: ShieldCheck,
                   t: 'No hard credit pull',
-                  b: 'Soft credit pulls only — your score stays untouched.',
+                  b: 'Pre-qualification uses soft credit only.',
                 },
                 {
-                  icon: CheckCircle2,
-                  t: 'High approval rate',
-                  b: 'Industry-agnostic underwriting that says yes more often.',
+                  icon: Clock3,
+                  t: 'Fast approvals',
+                  b: 'A direct underwriting process designed for quick decisions.',
                 },
                 {
                   icon: Zap,
-                  t: 'Low, competitive fees',
-                  b: 'Transparent pricing so you keep more of your cash.',
+                  t: 'Revenue-based terms',
+                  b: 'Funding structured around business activity and cash flow.',
                 },
               ].map((x) => {
                 const Icon = x.icon;
@@ -739,52 +742,6 @@ function App() {
                   </div>
                 );
               })}
-            </div>
-          </div>
-        </section>
-
-        <section className="bg-gradient-to-b from-white to-mint-50/40 py-20 sm:py-24">
-          <div className="mx-auto max-w-6xl px-4 sm:px-6">
-            <div className="grid gap-12 lg:grid-cols-12 lg:items-center lg:gap-10">
-              <div className="lg:col-span-5">
-                <p className="text-eyebrow font-semibold uppercase text-brand-700">
-                  Minimum requirements
-                </p>
-                <h2 className="mt-3 text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">
-                  Quick eligibility — verified during your application.
-                </h2>
-                <p className="mt-4 text-pretty text-slate-600">
-                  No long checklist. Most owners qualify with a soft pull and a
-                  few months of business bank statements.
-                </p>
-                <a
-                  href={APPLY}
-                  className="mt-7 inline-flex items-center gap-1.5 rounded-xl bg-slate-900 px-5 py-3 text-sm font-semibold text-white hover:bg-slate-800"
-                >
-                  Check eligibility
-                  <ChevronRight className="h-4 w-4" />
-                </a>
-              </div>
-              <ul className="grid gap-3 sm:grid-cols-2 lg:col-span-7">
-                {[
-                  { l: 'Time in business', v: '10+ months' },
-                  { l: 'Monthly revenue', v: '$15,000+' },
-                  { l: 'FICO', v: '500+' },
-                  { l: 'Bankruptcies', v: 'None open' },
-                ].map((r) => (
-                  <li
-                    key={r.l}
-                    className="rounded-2xl border border-slate-200 bg-white p-5 shadow-soft"
-                  >
-                    <p className="text-eyebrow font-semibold uppercase text-slate-500">
-                      {r.l}
-                    </p>
-                    <p className="mt-2 text-2xl font-bold tracking-tight text-slate-900">
-                      {r.v}
-                    </p>
-                  </li>
-                ))}
-              </ul>
             </div>
           </div>
         </section>
@@ -809,7 +766,7 @@ function App() {
               </span>
               <span className="text-left text-sm text-slate-200">
                 <span className="block font-semibold">Michael J.</span>
-                <span className="text-slate-400">CEO, Bridge Lift Capital</span>
+                <span className="text-slate-400">CEO, BridgeLift Capital</span>
               </span>
             </div>
           </div>
@@ -822,7 +779,7 @@ function App() {
                 Frequently asked
               </p>
               <h2 className="mt-3 text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">
-                Answers, before you ask.
+                Answers, before you apply.
               </h2>
             </div>
             <ul className="mt-10 space-y-3">
@@ -874,7 +831,7 @@ function App() {
                 ISO partnership
               </p>
               <h2 className="mt-3 text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">
-                Become an ISO with Bridge Lift.
+                Become an ISO with BridgeLift.
               </h2>
               <p className="mt-4 text-pretty text-slate-600">
                 Strong commissions, fast turnarounds, and underwriters who
@@ -885,7 +842,7 @@ function App() {
                 {[
                   'Competitive commission structure',
                   'Dedicated ISO manager',
-                  'Same-day decisions on most files',
+                  '1 hour decision',
                 ].map((t) => (
                   <li key={t} className="flex items-center gap-2">
                     <CheckCircle2 className="h-4 w-4 text-mint-500" />
@@ -902,7 +859,10 @@ function App() {
                 {submitted === 'iso' ? (
                   <p className="mb-4 rounded-xl border border-mint-200 bg-mint-50 p-3 text-sm text-mint-800">
                     Email opened. If nothing happened, write us at{' '}
-                    <a className="font-semibold underline" href="mailto:deals@bridgeliftcapital.com">
+                    <a
+                      className="font-semibold underline"
+                      href="mailto:deals@bridgeliftcapital.com"
+                    >
                       deals@bridgeliftcapital.com
                     </a>
                     .
@@ -941,13 +901,13 @@ function App() {
                 </div>
                 <button
                   type="submit"
-                  className="mt-6 inline-flex w-full items-center justify-center gap-1 rounded-xl bg-gradient-to-tr from-brand-600 to-mint-500 px-4 py-3 text-sm font-semibold text-white shadow-md shadow-brand-600/20 transition hover:from-brand-500 hover:to-mint-400"
+                  className="mt-6 inline-flex w-full items-center justify-center gap-1 rounded-xl bg-gradient-to-tr from-mint-500 to-brand-500 px-4 py-3 text-sm font-semibold text-white shadow-md shadow-brand-600/20 transition hover:from-mint-400 hover:to-brand-400"
                 >
                   Submit
                   <ArrowUpRight className="h-4 w-4" />
                 </button>
                 <p className="mt-3 text-xs text-slate-500">
-                  By submitting, you agree to be contacted by Bridge Lift Capital.
+                  By submitting, you agree to be contacted by BridgeLift Capital.
                 </p>
               </form>
             </div>
@@ -1018,7 +978,7 @@ function App() {
               aria-hidden
             />
             <p className="text-sm text-slate-500">
-              © {new Date().getFullYear()} Bridge Lift Capital. All rights
+              © {new Date().getFullYear()} BridgeLift Capital. All rights
               reserved.
             </p>
           </div>
