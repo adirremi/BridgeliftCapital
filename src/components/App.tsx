@@ -60,7 +60,7 @@ const examples: FundingExample[] = [
   {
     icon: Coffee,
     business: 'Coffee shop',
-    amount: '$5,000',
+    amount: '$15,000',
     use: 'Cash-flow cushion for seasonal purchasing',
     tone: 'from-lime-100 to-emerald-100 text-lime-700',
   },
@@ -74,14 +74,14 @@ const examples: FundingExample[] = [
   {
     icon: Utensils,
     business: 'Restaurant',
-    amount: '$60,000',
+    amount: '$150,000',
     use: 'Inventory, staffing, and kitchen repairs',
     tone: 'from-emerald-100 to-teal-100 text-emerald-700',
   },
   {
     icon: Building2,
     business: 'Construction',
-    amount: '$200,000',
+    amount: '$60,000',
     use: 'Materials and payroll between draws',
     tone: 'from-blue-100 to-emerald-100 text-blue-700',
   },
@@ -108,7 +108,11 @@ const stats = [
 const faqs = [
   {
     q: 'What kind of funding does BridgeLift Capital provide?',
-    a: 'BridgeLift Capital provides cash advance and revenue-based financing for small businesses. Repayment is structured around business revenue, not a traditional bank-loan model.',
+    a: 'BridgeLift Capital provides merchant cash advances (revenue-based financing), where we purchase a portion of a business’s future receivables. Payments are made as a percentage of revenue and may vary based on performance. This is not a loan.',
+  },
+  {
+    q: 'Is this a loan?',
+    a: 'No. A merchant cash advance is not a loan. It is a purchase of future receivables, and payments may vary based on revenue.',
   },
   {
     q: 'Will applying affect my credit score?',
@@ -124,7 +128,7 @@ const faqs = [
   },
   {
     q: 'What are the minimum requirements?',
-    a: 'At least 10 months in business, $15,000+ in monthly revenue, 500+ FICO, and no open bankruptcies.',
+    a: 'At least 10 months in business, $25,000+ in monthly revenue, 500+ FICO, and no open bankruptcies.',
   },
 ];
 
@@ -319,15 +323,7 @@ function App() {
           />
           <div className="mx-auto grid max-w-6xl items-center gap-12 px-4 pb-16 pt-14 sm:px-6 lg:grid-cols-12 lg:gap-8 lg:pb-24 lg:pt-20">
             <div className="lg:col-span-7">
-              <p className="inline-flex items-center gap-2 rounded-full border border-mint-200 bg-white/80 px-3 py-1 text-xs font-semibold text-mint-700 shadow-sm">
-                <span className="relative flex h-2 w-2">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-mint-400 opacity-60" />
-                  <span className="relative inline-flex h-2 w-2 rounded-full bg-mint-500" />
-                </span>
-                CASH ADVANCE LENDER · REVENUE-BASED FINANCING
-              </p>
-
-              <h1 className="mt-5 text-balance font-semibold tracking-tight text-slate-900 text-display">
+              <h1 className="text-balance font-semibold tracking-tight text-slate-900 text-display">
                 Fast capital
                 <br />
                 built around your
@@ -531,7 +527,7 @@ function App() {
                 <ul className="mt-5 space-y-3">
                   {[
                     ['Time in business', '10+ months'],
-                    ['Monthly revenue', '$15,000+'],
+                    ['Monthly revenue', '$25,000+'],
                     ['FICO', '500+'],
                     ['Bankruptcies', 'None open'],
                   ].map(([label, value]) => (
@@ -601,18 +597,14 @@ function App() {
           className="relative overflow-hidden border-y border-slate-100 bg-gradient-to-b from-mint-50/40 via-white to-brand-50/30 py-20 sm:py-24"
         >
           <div className="mx-auto max-w-6xl px-4 sm:px-6">
-            <div className="flex flex-col items-end justify-between gap-6 sm:flex-row sm:items-end">
-              <div className="max-w-2xl">
-                <p className="text-eyebrow font-semibold uppercase text-brand-700">
-                  Funding examples
-                </p>
-                <h2 className="mt-3 text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">
-                  Real-world cash needs, fast capital responses.
-                </h2>
-              </div>
-              <p className="text-sm text-slate-500">
-                Examples are illustrative. Approved amounts vary by revenue.
+            <div className="max-w-3xl">
+              <p className="text-eyebrow font-semibold uppercase text-brand-700">
+                Recent fundings
               </p>
+              <h2 className="mt-3 text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">
+                Recent fundings across real businesses. Fast decisions, real
+                capital.
+              </h2>
             </div>
 
             <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -638,7 +630,7 @@ function App() {
                   <div className="relative mt-6 flex items-end justify-between gap-4">
                     <div>
                       <p className="text-eyebrow font-semibold uppercase text-slate-500">
-                        Approved for
+                        Funded $
                       </p>
                       <p className="mt-1 text-3xl font-bold tracking-tight text-slate-900">
                         {item.amount}
@@ -662,12 +654,11 @@ function App() {
                 Our process
               </p>
               <h2 className="mt-3 text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">
-                Built for speed, underwritten like a lender.
+                Built for speed. Structured to get deals done.
               </h2>
               <p className="mt-3 text-pretty text-slate-600">
-                No shopping your file around. BridgeLift Capital reviews your
-                revenue, verifies eligibility, and gives you a clear funding
-                path.
+                No runaround. We review quickly, structure the deal, and give
+                you a clear answer.
               </p>
             </div>
 
@@ -676,15 +667,15 @@ function App() {
                 [
                   {
                     step: 'Apply online',
-                    d: 'Submit a short application with basic business details and recent bank statements.',
+                    d: 'Complete a short form with basic business details and recent activity.',
                   },
                   {
-                    step: '1 hour decision',
-                    d: 'Our underwriting team reviews revenue, cash flow, and soft-credit data quickly.',
+                    step: 'Quick review & decision',
+                    d: 'We review revenue and provide a fast, clear response.',
                   },
                   {
-                    step: 'Same day funding',
-                    d: 'Accept your offer and receive funds as soon as the same business day after approval.',
+                    step: 'Funding completed',
+                    d: 'Once approved, funds can be sent as soon as the same business day.',
                   },
                 ] as const
               ).map((item, i) => (
@@ -708,22 +699,36 @@ function App() {
               ))}
             </ol>
 
-            <div className="mt-14 grid gap-5 sm:grid-cols-3">
+          </div>
+        </section>
+
+        <section className="bg-gradient-to-b from-white via-mint-50/30 to-white py-20 sm:py-24">
+          <div className="mx-auto max-w-6xl px-4 sm:px-6">
+            <div className="mx-auto max-w-2xl text-center">
+              <p className="text-eyebrow font-semibold uppercase text-brand-700">
+                Why BridgeLift Capital
+              </p>
+              <h2 className="mt-3 text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">
+                A direct lender built around speed, structure, and follow-through.
+              </h2>
+            </div>
+
+            <div className="mt-12 grid gap-5 sm:grid-cols-3">
               {[
                 {
-                  icon: ShieldCheck,
-                  t: 'No hard credit pull',
-                  b: 'Pre-qualification uses soft credit only.',
-                },
-                {
-                  icon: Clock3,
-                  t: 'Fast approvals',
-                  b: 'A direct underwriting process designed for quick decisions.',
-                },
-                {
                   icon: Zap,
-                  t: 'Revenue-based terms',
-                  b: 'Funding structured around business activity and cash flow.',
+                  t: 'Fast decisions',
+                  b: 'Same-day reviews. Clear answers.',
+                },
+                {
+                  icon: Sparkles,
+                  t: 'Flexible structuring',
+                  b: 'Deals built around real cash flow.',
+                },
+                {
+                  icon: ShieldCheck,
+                  t: 'Reliable execution',
+                  b: 'From submission to funding—no delays.',
                 },
               ].map((x) => {
                 const Icon = x.icon;
@@ -752,23 +757,11 @@ function App() {
             aria-hidden
           />
           <div className="relative mx-auto max-w-3xl px-4 text-center sm:px-6">
-            <p className="text-eyebrow font-semibold uppercase text-mint-400">
-              Fueling the future for small businesses
-            </p>
-            <blockquote className="mt-6 text-balance text-2xl font-medium leading-relaxed text-white sm:text-3xl">
-              “Our mission is to empower businesses with fast, flexible funding
-              solutions, so they can focus on what truly matters — growing and
-              succeeding.”
+            <blockquote className="text-balance text-2xl font-medium leading-relaxed text-white sm:text-3xl">
+              “We know timing is everything in this business. Our job is simple
+              — move quickly, structure deals the right way, and get capital
+              out without unnecessary delays.”
             </blockquote>
-            <div className="mt-8 inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/5 px-4 py-2 backdrop-blur">
-              <span className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-brand-500 to-mint-500 font-bold text-white">
-                MJ
-              </span>
-              <span className="text-left text-sm text-slate-200">
-                <span className="block font-semibold">Michael J.</span>
-                <span className="text-slate-400">CEO, BridgeLift Capital</span>
-              </span>
-            </div>
           </div>
         </section>
 
