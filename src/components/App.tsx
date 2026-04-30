@@ -111,10 +111,6 @@ const faqs = [
     a: 'BridgeLift Capital provides merchant cash advances (revenue-based financing), where we purchase a portion of a business’s future receivables. Payments are made as a percentage of revenue and may vary based on performance. This is not a loan.',
   },
   {
-    q: 'Is this a loan?',
-    a: 'No. A merchant cash advance is not a loan. It is a purchase of future receivables, and payments may vary based on revenue.',
-  },
-  {
     q: 'Will applying affect my credit score?',
     a: 'No. Pre-qualification uses a soft credit pull only, so your credit score is not affected.',
   },
@@ -129,6 +125,10 @@ const faqs = [
   {
     q: 'What are the minimum requirements?',
     a: 'At least 10 months in business, $25,000+ in monthly revenue, 500+ FICO, and no open bankruptcies.',
+  },
+  {
+    q: 'Is this a loan?',
+    a: 'No. A merchant cash advance is not a loan. It is a purchase of future receivables, and payments may vary based on revenue.',
   },
 ];
 
@@ -221,22 +221,6 @@ function App() {
       >
         Skip to content
       </a>
-
-      <div className="relative isolate overflow-hidden border-b border-mint-100 bg-mint-50/70">
-        <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-2 text-xs sm:px-6">
-          <p className="flex items-center gap-2 font-medium text-mint-700">
-            <ShieldCheck className="h-3.5 w-3.5" strokeWidth={2.5} />
-            Direct cash advance lender · Soft credit pull only
-          </p>
-          <div className="hidden items-center gap-3 text-mint-700 sm:flex">
-            <span className="inline-flex items-center gap-1 font-medium">
-              <Clock3 className="h-3.5 w-3.5" /> 1 hour decision
-            </span>
-            <span aria-hidden>·</span>
-            <span>Same day funding available</span>
-          </div>
-        </div>
-      </div>
 
       <header className="sticky top-0 z-50 border-b border-slate-200/80 bg-white/85 backdrop-blur-md">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3 sm:px-6">
