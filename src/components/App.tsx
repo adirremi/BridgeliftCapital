@@ -1,4 +1,4 @@
-import { type FormEvent, useState } from 'react';
+import { useState } from 'react';
 import {
   ArrowUpRight,
   Building2,
@@ -22,7 +22,8 @@ import {
   type LucideIcon,
 } from 'lucide-react';
 
-const APPLY = 'https://bridgeliftcapital.com/apply-now/';
+const APPLY = '/apply-now/';
+const ISO = '/become-an-iso-partner/';
 const TERMS = 'https://bridgeliftcapital.com/terms-condition/';
 const PRIVACY = 'https://bridgeliftcapital.com/privacy-policy/';
 
@@ -132,14 +133,6 @@ const faqs = [
   },
 ];
 
-function buildMailto(subject: string, data: Record<string, string>) {
-  const body = Object.entries(data)
-    .map(([k, v]) => `${k}: ${v}`)
-    .join('\n');
-
-  return `mailto:deals@bridgeliftcapital.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-}
-
 function BusinessIcon({
   icon: Icon,
   tone,
@@ -196,22 +189,7 @@ function ApprovalCard({
 
 function App() {
   const [open, setOpen] = useState(false);
-  const [submitted, setSubmitted] = useState<'iso' | null>(null);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
-
-  const onIsoSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const fd = new FormData(e.currentTarget);
-    const data: Record<string, string> = {};
-    fd.forEach((v, k) => {
-      if (typeof v === 'string') data[k] = v;
-    });
-    window.location.href = buildMailto(
-      'ISO partnership inquiry from bridgeliftcapital.com (preview)',
-      data,
-    );
-    setSubmitted('iso');
-  };
 
   return (
     <div className="bg-white text-slate-800">
@@ -250,7 +228,7 @@ function App() {
 
           <div className="flex shrink-0 items-center gap-2">
             <a
-              href="mailto:deals@bridgeliftcapital.com?subject=ISO%20Partnership"
+              href={ISO}
               className="hidden md:inline-flex items-center justify-center rounded-lg border border-slate-200 bg-white px-3.5 py-2 text-sm font-semibold text-slate-700 transition hover:border-slate-300 hover:bg-slate-50"
             >
               ISO Partnership
@@ -287,7 +265,7 @@ function App() {
                 </a>
               ))}
               <a
-                href="mailto:deals@bridgeliftcapital.com?subject=ISO%20Partnership"
+                href={ISO}
                 className="block rounded-md py-2.5 font-semibold text-slate-900"
                 onClick={() => setOpen(false)}
               >
@@ -344,19 +322,18 @@ function App() {
               </div>
 
               <ul className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-slate-600">
-                {[
-                  ['No impact on credit', ShieldCheck],
-                  ['Same day funding', Zap],
-                  ['Fast approvals', Clock3],
-                ].map(([label, Icon]) => {
-                  const I = Icon as typeof ShieldCheck;
-                  return (
-                    <li key={label as string} className="inline-flex items-center gap-2">
-                      <I className="h-4 w-4 text-mint-600" strokeWidth={2.25} />
-                      {label}
-                    </li>
-                  );
-                })}
+                {(
+                  [
+                    ['No impact on credit', ShieldCheck],
+                    ['Same day funding', Zap],
+                    ['Fast approvals', Clock3],
+                  ] as const
+                ).map(([label, Icon]) => (
+                  <li key={label} className="inline-flex items-center gap-2">
+                    <Icon className="h-4 w-4 text-mint-600" strokeWidth={2.25} />
+                    {label}
+                  </li>
+                ))}
               </ul>
             </div>
 
@@ -802,91 +779,52 @@ function App() {
           id="iso"
           className="bg-gradient-to-b from-white to-brand-50/40 py-20 sm:py-24"
         >
-          <div className="mx-auto grid max-w-6xl gap-10 px-4 sm:px-6 lg:grid-cols-12 lg:gap-12">
-            <div className="lg:col-span-5">
-              <p className="text-eyebrow font-semibold uppercase text-brand-700">
-                ISO partnership
-              </p>
-              <h2 className="mt-3 text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">
-                Become an ISO with BridgeLift.
-              </h2>
-              <p className="mt-4 text-pretty text-slate-600">
-                Strong commissions, fast turnarounds, and underwriters who
-                actually pick up the phone. Submit a quick intro and an ISO
-                manager will reach out.
-              </p>
-              <ul className="mt-6 space-y-2 text-sm text-slate-700">
-                {[
-                  'Competitive commission structure',
-                  'Dedicated ISO manager',
-                  '1 hour decision',
-                ].map((t) => (
-                  <li key={t} className="flex items-center gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-mint-500" />
-                    {t}
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="lg:col-span-7">
-              <form
-                onSubmit={onIsoSubmit}
-                className="rounded-3xl border border-slate-200 bg-white p-6 shadow-soft sm:p-8"
-              >
-                {submitted === 'iso' ? (
-                  <p className="mb-4 rounded-xl border border-mint-200 bg-mint-50 p-3 text-sm text-mint-800">
-                    Email opened. If nothing happened, write us at{' '}
-                    <a
-                      className="font-semibold underline"
-                      href="mailto:deals@bridgeliftcapital.com"
-                    >
-                      deals@bridgeliftcapital.com
-                    </a>
-                    .
+          <div className="mx-auto max-w-6xl px-4 sm:px-6">
+            <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-white p-8 shadow-soft sm:p-12">
+              <div
+                className="absolute -right-16 -top-16 h-56 w-56 rounded-full bg-gradient-to-br from-mint-100 to-brand-100 opacity-70 blur-2xl"
+                aria-hidden
+              />
+              <div className="relative grid gap-10 lg:grid-cols-12 lg:items-center lg:gap-12">
+                <div className="lg:col-span-7">
+                  <p className="text-eyebrow font-semibold uppercase text-brand-700">
+                    ISO partnership
                   </p>
-                ) : null}
-                <div className="grid gap-4 sm:grid-cols-2">
-                  {(
-                    [
-                      ['Full name', 'text'],
-                      ['Company name', 'text'],
-                      ['Company website', 'url'],
-                      ['Phone number', 'tel'],
-                      ['Email address', 'email'],
-                      ['Address', 'text'],
-                    ] as const
-                  ).map(([label, type]) => {
-                    const id = label.toLowerCase().replace(/\s+/g, '-');
-                    const isFull = label === 'Address';
-                    return (
-                      <div key={label} className={isFull ? 'sm:col-span-2' : ''}>
-                        <label
-                          htmlFor={`iso-${id}`}
-                          className="text-sm font-medium text-slate-700"
-                        >
-                          {label}
-                        </label>
-                        <input
-                          id={`iso-${id}`}
-                          name={label}
-                          type={type}
-                          className="mt-1.5 w-full rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-slate-900 shadow-sm transition placeholder:text-slate-400 focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/20"
-                        />
-                      </div>
-                    );
-                  })}
+                  <h2 className="mt-3 text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">
+                    Become an ISO with BridgeLift.
+                  </h2>
+                  <p className="mt-4 max-w-2xl text-pretty text-slate-600">
+                    Strong commissions, fast turnarounds, and underwriters who
+                    actually pick up the phone. Submit a quick intro and an
+                    ISO manager will reach out.
+                  </p>
+                  <ul className="mt-6 grid gap-2 text-sm text-slate-700 sm:grid-cols-2">
+                    {[
+                      'Competitive commission structure',
+                      'Dedicated ISO manager',
+                      '1 hour decision',
+                      'Funding up to $2M per file',
+                    ].map((t) => (
+                      <li key={t} className="flex items-center gap-2">
+                        <CheckCircle2 className="h-4 w-4 text-mint-500" />
+                        {t}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-                <button
-                  type="submit"
-                  className="mt-6 inline-flex w-full items-center justify-center gap-1 rounded-xl bg-gradient-to-tr from-mint-500 to-brand-500 px-4 py-3 text-sm font-semibold text-white shadow-md shadow-brand-600/20 transition hover:from-mint-400 hover:to-brand-400"
-                >
-                  Submit
-                  <ArrowUpRight className="h-4 w-4" />
-                </button>
-                <p className="mt-3 text-xs text-slate-500">
-                  By submitting, you agree to be contacted by BridgeLift Capital.
-                </p>
-              </form>
+                <div className="lg:col-span-5 lg:text-right">
+                  <a
+                    href={ISO}
+                    className="inline-flex w-full items-center justify-center gap-1 rounded-xl bg-gradient-to-tr from-mint-500 to-brand-500 px-5 py-3.5 text-base font-semibold text-white shadow-md shadow-brand-600/20 transition hover:from-mint-400 hover:to-brand-400 sm:w-auto"
+                  >
+                    Become an ISO partner
+                    <ArrowUpRight className="h-4 w-4" />
+                  </a>
+                  <p className="mt-3 text-xs text-slate-500">
+                    Inquiries go to deals@bridgeliftcapital.com
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </section>

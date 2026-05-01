@@ -1,0 +1,44 @@
+---
+import ApplyNowPage from '../components/ApplyNowPage';
+import '../styles/global.css';
+const site = 'https://bridgeliftcapital.com';
+const url = site + '/apply-now/';
+---
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      rel="icon"
+      type="image/webp"
+      href="/Bridge-Lift-Capital-Favicon.webp"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Apply for cash advance and revenue-based financing up to $2 million with BridgeLift Capital. 1 hour decisions and same day funding available."
+    />
+    <title>Apply Now | BridgeLift Capital</title>
+    <link rel="canonical" href={url} />
+    <meta property="og:url" content={url} />
+    <meta property="og:title" content="Apply Now — BridgeLift Capital" />
+    <meta
+      property="og:description"
+      content="Apply in minutes for revenue-based financing up to $2M. 1 hour decisions, same day funding available."
+    />
+    <meta
+      property="og:image"
+      content={site + '/wp-content/uploads/2024/11/Bridge-Lift-Capital.webp'}
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+  </head>
+  <body class="min-h-screen bg-slate-50 text-slate-800 antialiased">
+    <ApplyNowPage client:load />
+  </body>
+</html>
