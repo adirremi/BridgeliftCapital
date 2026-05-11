@@ -72,7 +72,12 @@ export type GuidelinesContact =
       phone: string;
     };
 
-const DEFAULT_CONTACT: GuidelinesContact = { kind: 'default' };
+const DEFAULT_CONTACT: GuidelinesContact = {
+  kind: 'personal',
+  name: 'Clay Evans',
+  email: 'clay@bridgeliftcapital.com',
+  phone: '(502) 526-3665',
+};
 
 export default function FundingGuidelinesPage({
   contact = DEFAULT_CONTACT,
