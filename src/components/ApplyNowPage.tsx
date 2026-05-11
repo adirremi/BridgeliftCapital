@@ -72,9 +72,15 @@ export default function ApplyNowPage() {
         throw new Error(`Request failed (${res.status})`);
       }
 
-      const data = (await res.json().catch(() => ({}))) as { success?: string };
+      const data = (await res.json().catch(() => ({}))) as {
+        success?: string;
+        message?: string;
+      };
       if (data.success && String(data.success).toLowerCase() !== 'true') {
-        throw new Error('Submission was not accepted.');
+        throw new Error(
+          data.message ??
+            'Submission was not accepted. The form recipient may need to confirm their email first.',
+        );
       }
 
       form.reset();
@@ -187,8 +193,9 @@ export default function ApplyNowPage() {
                   className="mt-5 rounded-xl border border-rose-200 bg-rose-50 p-4 text-sm text-rose-800"
                 >
                   <p className="font-semibold">Could not send your application.</p>
+                  {errorMsg ? <p className="mt-1">{errorMsg}</p> : null}
                   <p className="mt-1">
-                    {errorMsg ?? 'Please try again or email us directly at '}
+                    Please try again or email us directly at{' '}
                     <a
                       href="mailto:deals@bridgeliftcapital.com"
                       className="font-semibold underline"

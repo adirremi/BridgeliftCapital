@@ -1,0 +1,98 @@
+---
+import FundingGuidelinesPage from '../components/FundingGuidelinesPage';
+import '../styles/global.css';
+const site = 'https://bridgeliftcapital.com';
+const url = site + '/funding-guidelines-clay/';
+---
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      rel="icon"
+      type="image/webp"
+      href="/Bridge-Lift-Capital-Favicon.webp"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <meta
+      name="description"
+      content="BridgeLift Capital funding guidelines — quick reference contact card for Clay Evans."
+    />
+    <title>Funding Guidelines — Clay Evans | BridgeLift Capital</title>
+    <link rel="canonical" href={url} />
+    <meta property="og:url" content={url} />
+    <meta
+      property="og:title"
+      content="Funding Guidelines — Clay Evans | BridgeLift Capital"
+    />
+    <meta
+      property="og:description"
+      content="Quick reference for ISO partners. Max funding $250K, buy rates 1.29–1.38, 1 hour decisions."
+    />
+    <meta
+      property="og:image"
+      content={site + '/wp-content/uploads/2024/11/Bridge-Lift-Capital.webp'}
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <style is:global>
+      @page {
+        size: A4 portrait;
+        margin: 0;
+      }
+
+      .sheet {
+        width: 100%;
+        min-height: 1100px;
+      }
+
+      @media screen and (min-width: 880px) {
+        .sheet {
+          width: 794px;
+          min-height: 1123px;
+          margin-inline: auto;
+        }
+      }
+
+      @media print {
+        html,
+        body {
+          background: #ffffff !important;
+          margin: 0 !important;
+          padding: 0 !important;
+        }
+
+        * {
+          -webkit-print-color-adjust: exact !important;
+          print-color-adjust: exact !important;
+        }
+
+        .sheet {
+          width: 210mm;
+          min-height: 297mm;
+          margin: 0 !important;
+          page-break-after: avoid;
+          page-break-inside: avoid;
+        }
+      }
+    </style>
+  </head>
+  <body class="min-h-screen bg-slate-100 text-slate-800 antialiased">
+    <FundingGuidelinesPage
+      client:load
+      contact={{
+        kind: 'personal',
+        name: 'Clay Evans',
+        email: 'clay@bridgeliftcapital.com',
+        phone: '(502) 526-3665',
+      }}
+    />
+  </body>
+</html>
